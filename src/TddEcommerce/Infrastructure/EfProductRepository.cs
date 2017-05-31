@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using TddEcommerce.Domain;
 
@@ -18,9 +19,14 @@ namespace TddEcommerce.Infrastructure
             db.SaveChanges();
         }
 
-        public Product findOne(long id)
+        public Product FindOne(long id)
         {
             return db.Products.SingleOrDefault(m=>m.ID == id);
+        }
+
+        public List<Product> FindAll()
+        {
+            return db.Products.ToList();
         }
     }
 }

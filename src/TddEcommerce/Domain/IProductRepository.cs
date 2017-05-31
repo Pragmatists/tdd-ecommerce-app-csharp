@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+
 namespace TddEcommerce.Domain
 {
     public interface IProductRepository
     {
         void Save(Product product);
-        Product findOne(long id);
+        Product FindOne(long id);
+        List<Product> FindAll();
     }
 }

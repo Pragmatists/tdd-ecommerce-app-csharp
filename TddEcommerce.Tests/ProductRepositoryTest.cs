@@ -17,7 +17,7 @@ namespace TddEcommerce.Tests
 
             productRepository.Save(product);
 
-            Product loaded = productRepository.findOne(1L);
+            Product loaded = productRepository.FindOne(1L);
             loaded.ShouldBeEquivalentTo(product);
         }
     }
