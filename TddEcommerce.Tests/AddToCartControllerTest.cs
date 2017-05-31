@@ -6,6 +6,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TddEcommerce.Domain;
 using Xunit;
 
@@ -19,7 +20,8 @@ namespace TddEcommerce.Tests
         [Fact]
         public async Task AddProductToCart()
         {
-            var webHostBuilder = new WebHostBuilder().UseStartup<Startup>();
+            IConfiguration config = new ConfigurationBuilder().Build();
+            var webHostBuilder = new WebHostBuilder().UseConfiguration(config).UseStartup<Startup>();
             server = new TestServer(webHostBuilder);
             client = server.CreateClient();
 
