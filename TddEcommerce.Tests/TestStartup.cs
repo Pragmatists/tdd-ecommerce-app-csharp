@@ -48,7 +48,7 @@ namespace TddEcommerce.Tests
         {
             var products = repo.FindAll();
             if (!products.Any())
-                repo.Save(new Product(1, "Cup", new Money(2, 50)));
+                repo.Save(new Product("Cup", new Money(2, 50)));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace TddEcommerce.Tests
             var response = await client.PostAsync("api/user/5/cart/items", content);
             response.EnsureSuccessStatusCode();
 
-            var cart = TestStartup.commerceContext.Carts.First();
+            var cart = TestStartup.commerceContext.Carts.Include(x=>x.Items).First();
             cart.Items.Should().Contain(new CartItem {ProductId = 1});
         }
     }

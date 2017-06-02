@@ -13,10 +13,11 @@ namespace TddEcommerce.Infrastructure
             this.db = db;
         }
 
-        public void Save(Product product)
+        public long Save(Product product)
         {
             db.Products.Add(product);
             db.SaveChanges();
+            return product.ID;
         }
 
         public Product FindOne(long id)

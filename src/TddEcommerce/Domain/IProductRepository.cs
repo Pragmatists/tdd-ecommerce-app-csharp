@@ -4,7 +4,7 @@ namespace TddEcommerce.Domain
 {
     public interface IProductRepository
     {
-        void Save(Product product);
+        long Save(Product product);
         Product FindOne(long id);
         List<Product> FindAll();
     }

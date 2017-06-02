@@ -11,14 +11,24 @@ namespace TddEcommerce.Tests
         [Fact]
         public void StoresAndLoadsProduct()
         {
-            Product product = new Product(1L, "cup", new Money(1, 25));
-            var options = new DbContextOptionsBuilder<CommerceContext>().UseInMemoryDatabase().Options;
-            IProductRepository productRepository = new EfProductRepository(new CommerceContext(options));
+            Product product = new Product("cup", new Money(1, 25));
+            IProductRepository productRepository = new EfProductRepository(CreateCommerceContext());
 
-            productRepository.Save(product);
+            var id = productRepository.Save(product);
 
-            Product loaded = productRepository.FindOne(1L);
+            Product loaded = productRepository.FindOne(id);
+            using (var cc = CreateCommerceContext())
+            {
+                cc.Products.Find(id).Price.Should().Be(125);
+            }
+            loaded.Price.ToCents().Should().Be(125);
             loaded.ShouldBeEquivalentTo(product);
+        }
+
+        private static CommerceContext CreateCommerceContext()
+        {
+            var options = new DbContextOptionsBuilder<CommerceContext>().UseInMemoryDatabase().Options;
+            return new CommerceContext(options);
         }
     }
 }

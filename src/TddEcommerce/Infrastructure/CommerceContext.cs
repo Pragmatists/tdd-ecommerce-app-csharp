@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace TddEcommerce.Domain
@@ -11,6 +12,7 @@ namespace TddEcommerce.Domain
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<Money>();
+            modelBuilder.Entity<Product>().Property(x => x.Cents);
             base.OnModelCreating(modelBuilder);
         }
 
