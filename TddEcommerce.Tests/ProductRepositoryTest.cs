@@ -17,11 +17,6 @@ namespace TddEcommerce.Tests
             var id = productRepository.Save(product);
 
             Product loaded = productRepository.FindOne(id);
-            using (var cc = CreateCommerceContext())
-            {
-                cc.Products.Find(id).Price.Should().Be(125);
-            }
-            loaded.Price.ToCents().Should().Be(125);
             loaded.ShouldBeEquivalentTo(product);
         }
 
